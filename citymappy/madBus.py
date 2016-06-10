@@ -22,11 +22,14 @@ def get_stop_time(idStop):
     x = j['stops'][0]['services']
     response = {'stops': [{}, {}]}
     for i in range(2):
-        response['stops'][i]['name'] = x[i]['route_id'].strip('EMTBus')
-        response['stops'][i]['headsign'] = x[i]['headsign']
         try:
-            response['stops'][i]['arrival'] = x[i]['live_departures_seconds'][0]
+            response['stops'][i]['name'] = x[i]['route_id'].split('Bus')[-1]
+            response['stops'][i]['headsign'] = x[i]['headsign']
+            try:
+                response['stops'][i]['arrival'] = x[i]['live_departures_seconds'][0]
+            except:
+                response['stops'][i]['arrival'] = str(x[i]['next_departures'][0])
         except:
-            response['stops'][i]['arrival'] = str(x[i]['next_departures'][0])
+            pass
 
     return response
