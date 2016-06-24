@@ -1,10 +1,10 @@
 from setuptools import setup
 
 setup(name='citymappy',
-      version='0.1',
+      version='0.2',
       description='Citymapper API',
       url='',
-      author='CityMapper Ignacio Ballesteros',
+      author='CityMapper, Ignacio Ballesteros',
       author_email='',
       license='MIT',
       packages=['citymappy'],
