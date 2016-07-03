@@ -6,6 +6,32 @@ with open("{}/headers.json".format(os.path.dirname(__file__)), 'r') as h:
     headers = json.loads(h.read())
 
 
+
+def nearby(loc):
+
+    url = "https://citymapper.com/api/2/nearby?"
+    kinds = "kinds=railstation&"
+    location = "location=" + loc
+    other = "&limit=5&region_id=es-madrid"
+    data = kinds + location + other
+
+    r = requests.get(url+data, headers=headers)
+    j = json.loads(r.text)
+    x = j['elements']
+    response = {'railstations': []}
+    for i in range(x.__len__()):
+        data = {}
+        try:
+            data['name'] = x[i]['name']
+            data['alias'] = x[i]['alias']
+            data['id'] = x[i]['id']
+        except:
+            pass
+        response['railstations'].append(data)
+
+    return response
+
+
 def get_departures(stop_id):
     ids = str(stop_id)
     ids= 'MadridStation_NuevosMinisterios'
