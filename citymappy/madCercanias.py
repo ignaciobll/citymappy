@@ -34,7 +34,6 @@ def nearby(loc):
 
 def get_departures(stop_id):
     ids = str(stop_id)
-    ids= 'MadridStation_NuevosMinisterios'
     url = 'https://citymapper.com/api/1/raildepartures?ids='
 
     r = requests.get(url + ids, headers=headers)
